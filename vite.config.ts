@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-const LOGO = path.resolve(__dirname, 'src/assets/brand/instamart-logo-square.png');
+const LOGO = path.resolve(import.meta.dirname, 'src/assets/brand/instamart-logo-square.png');
 
 /** Loud warning if the supplied Instamart logo is missing. The UI then shows text only — never a substitute. */
 function brandAssetCheck(): Plugin {
