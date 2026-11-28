@@ -136,7 +136,7 @@ async function route(req: CoreRequest, requestId: string): Promise<CoreResponse>
 
   /* ----- auth routes ----- */
   if (path === '/auth/login' && method === 'GET') {
-    const rl = rateLimit(`login:${req.ip}`, 10);
+    const rl = rateLimit(`login:${req.ip}`, 20);
     if (!rl.ok) return withCookie(json(429, { error: 'rate_limited', message: 'Too many sign-in attempts. Please wait a minute.' }));
     if (cfg.mode === 'stub') {
       session.record.started = true;

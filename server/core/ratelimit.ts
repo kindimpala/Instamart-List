@@ -4,7 +4,11 @@
  */
 const windows = new Map<string, { count: number; resetAt: number }>();
 
-export function rateLimit(key: string, limit: number, windowMs = 60_000, now = Date.now()): { ok: boolean; retryAfter: number } {
+/** RATE_LIMIT_MULTIPLIER (e.g. 10) loosens limits for automated test runs only. */
+const MULT = Math.max(1, Number(process.env.RATE_LIMIT_MULTIPLIER ?? 1) || 1);
+
+export function rateLimit(key: string, baseLimit: number, windowMs = 60_000, now = Date.now()): { ok: boolean; retryAfter: number } {
+  const limit = baseLimit * MULT;
   const w = windows.get(key);
   if (!w || w.resetAt <= now) {
     windows.set(key, { count: 1, resetAt: now + windowMs });

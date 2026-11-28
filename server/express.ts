@@ -25,6 +25,13 @@ async function main() {
   app.disable('x-powered-by');
   app.set('trust proxy', 'loopback');
   app.use(express.json({ limit: '64kb' }));
+  app.use((_req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Permissions-Policy', 'microphone=(self), camera=(), geolocation=()');
+    next();
+  });
 
   app.all(['/api/*', '/auth/*', '/stub/*'], async (req, res) => {
     const headers: Record<string, string | undefined> = {};

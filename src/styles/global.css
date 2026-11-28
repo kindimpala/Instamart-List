@@ -215,8 +215,8 @@ button {
   place-items: center;
 }
 .icon-btn svg {
-  width: 22px;
-  height: 22px;
+  width: max(22px, 1.375rem);
+  height: max(22px, 1.375rem);
 }
 
 /* ---------- Powered by Instamart badge ----------
@@ -291,10 +291,11 @@ button {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 0.5rem 0.75rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.25rem 0.5rem;
   align-items: center;
+  justify-content: space-between;
 }
 .topbar__title {
   font-size: 1.125rem;
@@ -303,12 +304,15 @@ button {
 }
 .topbar__actions {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.25rem;
   align-items: center;
 }
 .addr-pill {
-  grid-column: 1 / -1;
-  justify-self: start;
+  flex-basis: 100%;
+  width: fit-content;
+  flex-grow: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
