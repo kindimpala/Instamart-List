@@ -28,7 +28,7 @@ export interface McpClientOptions {
   sleep?: (ms: number) => Promise<void>;
 }
 
-const defaultSleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const defaultSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 /** Parses either an application/json body or a text/event-stream body. */
 export async function readRpcBody(res: Response): Promise<any> {
